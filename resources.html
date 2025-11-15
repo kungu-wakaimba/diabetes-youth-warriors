@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resources | Diabetes Community</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <span class="nav-logo">Diabetes Youth Warriors</span>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+                <li><a href="connect.html">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="resources-hero">
+        <div class="container">
+            <h1>Diabetes Resources & Management Tools</h1>
+            <p>Everything you need to manage your diabetes journey effectively</p>
+        </div>
+    </section>
+    
+    <main>
+        <!-- Diabetes Management Toolkit -->
+        <section class="toolkit-section">
+            <div class="container">
+                <div class="section-header toolkit-header collapsed" onclick="toggleToolkit()">
+                    <div>
+                        <h2>Diabetes Management Toolkit</h2>
+                        <p>Interactive tools to help you track and manage your diabetes daily</p>
+                    </div>
+                    <span class="toolkit-toggle-icon">▼</span>
+                </div>
+                
+                <div class="toolkit-grid" id="toolkit-grid">
+                    <!-- BMI Calculator -->
+                    <div class="tool-card" id="tool-bmi">
+                        <div class="tool-icon">📊</div>
+                        <h3>BMI Calculator</h3>
+                        <div class="tool-content">
+                            <div class="input-group">
+                                <label for="bmi-height">Height (cm)</label>
+                                <input type="number" id="bmi-height" placeholder="170" min="50" max="250">
+                            </div>
+                            <div class="input-group">
+                                <label for="bmi-weight">Weight (kg)</label>
+                                <input type="number" id="bmi-weight" placeholder="70" min="20" max="300">
+                            </div>
+                            <button class="tool-btn" onclick="calculateBMI()">Calculate BMI</button>
+                            <div id="bmi-result" class="tool-result"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Blood Sugar Tracker -->
+                    <div class="tool-card" id="tool-blood-sugar">
+                        <div class="tool-icon">🩸</div>
+                        <h3>Blood Sugar Tracker</h3>
+                        <div class="tool-content">
+                            <div class="input-group">
+                                <label for="bs-reading">Reading (mg/dL)</label>
+                                <input type="number" id="bs-reading" placeholder="120" min="50" max="500">
+                            </div>
+                            <div class="input-group">
+                                <label for="bs-time">Time</label>
+                                <input type="datetime-local" id="bs-time">
+                            </div>
+                            <button class="tool-btn" onclick="addBloodSugar()">Add Reading</button>
+                            <div id="bs-history" class="tool-history"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carb Counter -->
+                    <div class="tool-card" id="tool-carbs">
+                        <div class="tool-icon">🍞</div>
+                        <h3>Carb Counter</h3>
+                        <div class="tool-content">
+                            <div class="input-group">
+                                <label for="carb-amount">Carbs (grams)</label>
+                                <input type="number" id="carb-amount" placeholder="30" min="0" max="500">
+                            </div>
+                            <div class="input-group">
+                                <label for="carb-food">Food Item</label>
+                                <input type="text" id="carb-food" placeholder="e.g., Apple">
+                            </div>
+                            <button class="tool-btn" onclick="addCarbs()">Add Carbs</button>
+                            <div class="tool-summary">
+                                <strong>Today's Total: <span id="carb-total">0</span>g</strong>
+                            </div>
+                            <div id="carb-history" class="tool-history"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Medication Reminder -->
+                    <div class="tool-card" id="tool-medication">
+                        <div class="tool-icon">💊</div>
+                        <h3>Medication Reminder</h3>
+                        <div class="tool-content">
+                            <div class="input-group">
+                                <label for="med-name">Medication Name</label>
+                                <input type="text" id="med-name" placeholder="e.g., Metformin">
+                            </div>
+                            <div class="input-group">
+                                <label for="med-time">Time</label>
+                                <input type="time" id="med-time">
+                            </div>
+                            <div class="input-group">
+                                <label for="med-dose">Dose</label>
+                                <input type="text" id="med-dose" placeholder="e.g., 500mg">
+                            </div>
+                            <button class="tool-btn" onclick="addMedication()">Add Reminder</button>
+                            <div id="med-history" class="tool-history"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Water Intake Logger -->
+                    <div class="tool-card" id="tool-water">
+                        <div class="tool-icon">💧</div>
+                        <h3>Water Intake Logger</h3>
+                        <div class="tool-content">
+                            <div class="input-group">
+                                <label for="water-amount">Amount (ml)</label>
+                                <input type="number" id="water-amount" placeholder="250" min="0" max="2000" step="50">
+                            </div>
+                            <button class="tool-btn" onclick="addWater()">Add Water</button>
+                            <div class="tool-summary">
+                                <strong>Today's Total: <span id="water-total">0</span>ml</strong>
+                                <small>Goal: 2000ml</small>
+                            </div>
+                            <div class="water-progress">
+                                <div class="water-bar" id="water-bar"></div>
+                            </div>
+                            <div id="water-history" class="tool-history"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Monitor -->
+                    <div class="tool-card" id="tool-activity">
+                        <div class="tool-icon">🏃</div>
+                        <h3>Activity Monitor</h3>
+                        <div class="tool-content">
+                            <div class="input-group">
+                                <label for="activity-type">Activity Type</label>
+                                <input type="text" id="activity-type" placeholder="e.g., Walking">
+                            </div>
+                            <div class="input-group">
+                                <label for="activity-duration">Duration (minutes)</label>
+                                <input type="number" id="activity-duration" placeholder="30" min="1" max="600">
+                            </div>
+                            <button class="tool-btn" onclick="addActivity()">Log Activity</button>
+                            <div class="tool-summary">
+                                <strong>Today's Total: <span id="activity-total">0</span> min</strong>
+                            </div>
+                            <div id="activity-history" class="tool-history"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Information Sections -->
+        <section class="info-sections">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">ℹ️</div>
+                        <h3>General Diabetes Information</h3>
+                        <ul>
+                            <li><strong>What is Diabetes?</strong><br>
+                                A chronic health condition that affects how your body turns food into energy, mainly due to issues with insulin.</li>
+                            <li><strong>Types:</strong>
+                                <ul>
+                                    <li><strong>Type 1:</strong> Autoimmune, usually diagnosed in children or young adults.</li>
+                                    <li><strong>Type 2:</strong> More common, often related to lifestyle and genetics.</li>
+                                    <li><strong>Gestational:</strong> Occurs during pregnancy.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Symptoms:</strong> Frequent urination, increased thirst, unexplained weight loss, fatigue, blurred vision.</li>
+                            <li><strong>Management:</strong> Healthy eating, regular physical activity, medication/insulin, regular check-ups, stress management.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">🥗</div>
+                        <h3>Diet & Nutrition Tips</h3>
+                        <ul>
+                            <li>Choose whole grains, fruits, vegetables, lean proteins, and healthy fats.</li>
+                            <li>Be mindful of portion sizes and carbohydrate counting.</li>
+                            <li>Limit added sugars, sugary drinks, and processed foods.</li>
+                            <li>Eat regular meals and snacks to maintain blood sugar stability.</li>
+                            <li>Stay hydrated with water or unsweetened drinks.</li>
+                            <li>Explore <a href="https://www.eatright.org/health/diseases-and-conditions/diabetes" target="_blank" rel="noopener">EatRight: Diabetes Nutrition</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Daily Tip Carousel -->
+        <section class="interactive-section tip-carousel-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Daily Diabetes Tip</h2>
+                    <p>Get helpful tips every day to manage your diabetes better</p>
+                </div>
+                <div class="tip-carousel">
+                    <div class="tip-card active" data-tip="0">
+                        <div class="tip-icon">💡</div>
+                        <h3 id="tip-title">Stay Hydrated</h3>
+                        <p id="tip-content">Drinking plenty of water helps your kidneys flush out excess sugar through urine. Aim for 8-10 glasses daily.</p>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev-btn" onclick="changeTip(-1)">‹</button>
+                        <div class="carousel-dots" id="tip-dots"></div>
+                        <button class="carousel-btn next-btn" onclick="changeTip(1)">›</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Poll Widget -->
+        <section class="interactive-section poll-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Community Poll</h2>
+                    <p>Share your thoughts and see what the community thinks</p>
+                </div>
+                <div class="poll-widget">
+                    <div class="poll-question" id="poll-question">What's your biggest challenge in managing diabetes?</div>
+                    <div class="poll-options" id="poll-options">
+                        <button class="poll-option" onclick="votePoll(0)">
+                            <span class="option-text">Blood sugar fluctuations</span>
+                            <span class="option-percent" id="poll-0">0%</span>
+                        </button>
+                        <button class="poll-option" onclick="votePoll(1)">
+                            <span class="option-text">Meal planning</span>
+                            <span class="option-percent" id="poll-1">0%</span>
+                        </button>
+                        <button class="poll-option" onclick="votePoll(2)">
+                            <span class="option-text">Exercise motivation</span>
+                            <span class="option-percent" id="poll-2">0%</span>
+                        </button>
+                        <button class="poll-option" onclick="votePoll(3)">
+                            <span class="option-text">Medication management</span>
+                            <span class="option-percent" id="poll-3">0%</span>
+                        </button>
+                    </div>
+                    <div class="poll-footer">
+                        <span id="poll-total">0 votes</span>
+                        <button class="poll-reset-btn" onclick="resetPoll()">Reset Poll</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Support Links -->
+        <section class="support-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Support & Helpful Links</h2>
+                    <p>Trusted resources and organizations to support your journey</p>
+                </div>
+                <div class="resource-links">
+                    <div class="support-link">
+                        <a href="https://diabetes.org/" target="_blank" rel="noopener">American Diabetes Association</a>
+                        <p>Information, support, and advocacy.</p>
+                    </div>
+                    <div class="support-link">
+                        <a href="https://www.diabetes.org.uk/" target="_blank" rel="noopener">Diabetes UK</a>
+                        <p>Resources and community forums.</p>
+                    </div>
+                    <div class="support-link">
+                        <a href="https://beyondtype1.org/" target="_blank" rel="noopener">Beyond Type 1</a>
+                        <p>Stories, education, and support.</p>
+                    </div>
+                    <div class="support-link">
+                        <a href="https://www.childrensdiabetesfoundation.org/" target="_blank" rel="noopener">Children's Diabetes Foundation</a>
+                        <p>Empowering young people & families.</p>
+                    </div>
+                </div>
+                <p class="support-note">
+                    Need to talk? Join our <a href="connect.html">community forums</a> or <a href="https://www.diabetesdaily.com/forum/" target="_blank" rel="noopener">Diabetes Daily Forum</a>.
+                </p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Diabetes Youth Warriors</h3>
+                <p>Empowering lives, defeating diabetes together. A supportive community for everyone affected by diabetes.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="about.html">About Us</a></p>
+                <p><a href="blog.html">Blog</a></p>
+                <p><a href="resources.html">Resources</a></p>
+                <p><a href="connect.html">Connect</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <p>Follow us on social media for daily inspiration, tips, and community updates.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/groups/diabetescommunity" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+                    <a href="https://twitter.com/DiabetesCom" target="_blank" rel="noopener" aria-label="Twitter">🐦</a>
+                    <a href="https://instagram.com/diabetes.community" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+                    <a href="https://www.diabetesdaily.com/forum/" target="_blank" rel="noopener" aria-label="Forum">💬</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Diabetes Youth Warriors. Supporting one another, every day.</p>
+        </div>
+    </footer>
+    
+    <script src="toolkit.js"></script>
+</body>
+</html>
